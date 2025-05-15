@@ -1,68 +1,89 @@
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class PlayerControler : MonoBehaviour
 {
-    [SerializeField] private float MIN_X = -27f;
-    [SerializeField] private float MAX_X = 27f;
-
+    [Header("Movement")]
     [SerializeField] private float tempsAcceleration = 0.1f;
     [SerializeField] private float tempsMovementDistanceMinMax = 0.6f;
+    [SerializeField] public float forwardSpeed = 1f;
 
-    [SerializeField] private float forwardSpeed = 1f;
 
-    private float distanceMax;
+
+    [Header("Ground Calcul")]
+    [SerializeField] private GameObject groundPrefab;
+    public float MIN_X { get; private set; }
+    private float MAX_X;
+
+    public float distanceMax { get; private set; }
+
     private float speedMax;
     private float accelerate;
     private float currentSpeed = 0f;
     private float timeInput = 0f;
     private int lastDirection = 0;
-    void Start()
-    {
-        transform.position = new Vector3(0f, 0.5f, 0f);
 
-      
-        distanceMax = MAX_X - MIN_X;
-        speedMax = distanceMax / (tempsMovementDistanceMinMax - (tempsAcceleration / 2f));
-        accelerate = speedMax / tempsAcceleration;
+    private Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    void Update()
+    private void Start()
     {
-        float input = Input.GetAxisRaw("Horizontal"); 
+        GameObject tempGround = Instantiate(groundPrefab);
+        Collider groundCollider = tempGround.GetComponentInChildren<Collider>();
+
+        if (groundCollider == null)
+        {
+            Debug.LogError("Le groundPrefab instancié n'a pas de collider !");
+            Destroy(tempGround);
+            return;
+        }
+
+        float groundWidth = groundCollider.bounds.size.x;
+        float laneWidth = groundWidth / 3f;
+
+        MIN_X = -groundWidth / 2f + laneWidth / 2f;
+        MAX_X = groundWidth / 2f - laneWidth / 2f;
+        distanceMax = MAX_X - MIN_X;
+
+        speedMax = distanceMax / (tempsMovementDistanceMinMax - (tempsAcceleration / 2f));
+        accelerate = speedMax / tempsAcceleration;
+
+        rb.position = new Vector3(0f, rb.position.y, 0f);
+
+        Destroy(tempGround);
+    }
+
+
+    private void Update()
+    {
+        float input = Input.GetAxisRaw("Horizontal");
 
         if (input != 0f)
         {
             lastDirection = (int)Mathf.Sign(input);
-            timeInput += Time.deltaTime;
+            timeInput += Time.fixedDeltaTime;
             timeInput = Mathf.Min(timeInput, tempsAcceleration);
         }
         else
         {
-            timeInput -= Time.deltaTime;
+            timeInput -= Time.fixedDeltaTime;
             timeInput = Mathf.Max(timeInput, 0f);
         }
 
-        // Calcul de la vitesse courante
         currentSpeed = accelerate * timeInput;
 
-        // Utilise lastDirection ici
-        Vector3 horizontalMove = transform.right * lastDirection * currentSpeed * Time.deltaTime;
-        transform.position += horizontalMove;
+        Vector3 currentPos = rb.position;
+        Vector3 horizontalMove = transform.right * lastDirection * currentSpeed * Time.fixedDeltaTime;
+        Vector3 forwardMove = transform.forward * forwardSpeed * Time.fixedDeltaTime;
 
+        float nextX = Mathf.Clamp(currentPos.x + horizontalMove.x, MIN_X, MAX_X);
+        Vector3 nextPos = new Vector3(nextX, currentPos.y, currentPos.z + forwardMove.z);
 
-        // Clamp entre MIN_X et MAX_X
-        float clampedX = Mathf.Clamp(transform.position.x, MIN_X, MAX_X);
-        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
-
-        // Mouvement avant constant
-        transform.position += transform.forward * forwardSpeed * Time.deltaTime;
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        {
-            Debug.Log("touch�");       
-        }
+        rb.MovePosition(nextPos);
     }
 }
