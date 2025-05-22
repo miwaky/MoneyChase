@@ -227,7 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3724509776086465757}
   m_Layer: 0
-  m_Name: SpawnPoint_4
+  m_Name: spawnPoint_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4212554185907469826, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       propertyPath: m_Name
-      value: GroundSafe
+      value: Ground_Enigme_Center
       objectReference: {fileID: 0}
     - target: {fileID: 5207393542617554270, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -373,6 +373,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4212554185907469826, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2593754830005481483}
+    - targetCorrespondingSourceObject: {fileID: 4212554185907469826, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7342722243678583603}
   m_SourcePrefab: {fileID: 100100000, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
 --- !u!1 &327751785853459036 stripped
 GameObject:
@@ -392,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  EnigmePosition: 0
+  EnigmePosition: 2
   minObstacles: 0
   maxObstacles: 0
   minMoney: 0
@@ -407,6 +410,18 @@ MonoBehaviour:
   - {fileID: 475958250177162843}
   - {fileID: 1426669987110941663}
   - {fileID: 7481743581266645643}
+--- !u!114 &-7342722243678583603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327751785853459036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d49aa0201ae524783af724f0b35b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4831139673454916597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9075369912146417579, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}

@@ -25,6 +25,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject[] MoneyPrefabsLevel2;
     [SerializeField] private GameObject[] MoneyOnStage;
 
+    [Header("Enigme prefabs")]
+    [SerializeField] private GameObject[] EnigmePrefabsLevel1;
+    [SerializeField] private GameObject[] EnigmePrefabsLevel2;
+    private int groundCounterSinceLastEnigme = 0;
+    private int nextEnigmeAt = 0;
+
+    [SerializeField] private int enigmeIntervalMin = 20;
+    [SerializeField] private int enigmeIntervalMax = 30;
+
     [Header("Config")]
     [SerializeField] private int nbGroundsSafeAuDebut = 4;
     [SerializeField] public int currentLevel = 1;
@@ -41,7 +50,7 @@ public class LevelManager : MonoBehaviour
 
     private GameObject player;
     private float groundSize;
-   
+    private int pendingEnigmeSequence = 0;
 
     #endregion
 
@@ -61,13 +70,16 @@ public class LevelManager : MonoBehaviour
         }
         AppliquerVitesseJoueur();
 
+        nextEnigmeAt = Random.Range(enigmeIntervalMin, enigmeIntervalMax + 1);
+
+
         GroundsOnStage = new GameObject[nbrGround];
         InitGrounds();
     }
 
     private void Update()
     {
-        GroundLevel(); // uniquement recycler le sol
+        GroundLevel(); 
     }
 
     #region Ground management
@@ -102,82 +114,28 @@ public class LevelManager : MonoBehaviour
             {
                 if (ground != null) Destroy(ground);
 
+                //  Augmente le compteur de sol créés
+                groundCounterSinceLastEnigme++;
+
+                //  Déclenche séquence d’énigme si atteint
+                if (groundCounterSinceLastEnigme >= nextEnigmeAt)
+                {
+                    TriggerNextEnigmeSequence();
+                    groundCounterSinceLastEnigme = 0;
+                    nextEnigmeAt = Random.Range(enigmeIntervalMin, enigmeIntervalMax + 1);
+                    Debug.Log($"[LevelManager] Séquence énigme déclenchée ! Prochaine dans {nextEnigmeAt} sols.");
+                }
+
+                // 💡 Génère prefab selon logique
                 GameObject prefab = GetGroundPrefab(currentLevel);
                 GameObject newGround = Instantiate(prefab);
 
                 float z = ground != null ? ground.transform.position.z : player.transform.position.z;
                 newGround.transform.position = new Vector3(0f, 0.2f, z + groundSize * nbrGround);
                 GroundsOnStage[i] = newGround;
-
-                //controller.forwardSpeed = controller.baseSpeed * (currentLevel == 0 ? speedSafe : speedLevel1);
             }
         }
     }
-
-    #endregion
-
-    #region Obstacle recycling (safe level only)
-
-    //private void ObstacleLevel()
-    //{
-    //    if (currentLevel != 0) return; // Sécurité critique
-
-    //    float randomDistance = Random.Range(distanceObstacleMin, distanceObstacleMax);
-
-    //    for (int i = ObstacleOnStage.Length - 1; i >= 0; i--)
-    //    {
-    //        GameObject obstacle = ObstacleOnStage[i];
-    //        if (obstacle == null || obstacle.transform.position.z + 5f < player.transform.position.z)
-    //        {
-    //            if (obstacle != null) Destroy(obstacle);
-
-    //            GameObject newObstacle = Instantiate(GetObstaclePrefab(0));
-    //            if (newObstacle == null) continue;
-
-    //            SpawnXLocation();
-    //            ApplyDynamicScale(newObstacle);
-
-    //            float newZ = Mathf.Max(lastObstacleZ + randomDistance, player.transform.position.z + 10f);
-    //            newObstacle.transform.position = new Vector3(nextLocationSpawn, 1f, newZ);
-    //            lastObstacleZ = newZ;
-
-    //        }
-    //    }
-    //}
-
-
-    //#endregion
-
-    //#region Money recycling (safe level only)
-
-    //private void MoneyLevel()
-    //{
-    //    if (currentLevel != 0) return;
-
-    //    float randomDistance = Random.Range(distanceMoneyMin, distanceMoneyMax);
-
-    //    for (int i = MoneyOnStage.Length - 1; i >= 0; i--)
-    //    {
-    //        GameObject money = MoneyOnStage[i];
-    //        if (money == null || money.transform.position.z + 5f < player.transform.position.z)
-    //        {
-    //            if (money != null) Destroy(money);
-
-    //            GameObject newMoney = Instantiate(GetMoneyPrefab(0));
-    //            if (newMoney == null) continue;
-
-    //            SpawnXLocation();
-    //            ApplyDynamicScale(newMoney);
-
-    //            float newZ = Mathf.Max(lastMoneyZ + randomDistance, player.transform.position.z + 10f);
-    //            newMoney.transform.position = new Vector3(nextLocationSpawn, 2f, newZ);
-    //            lastMoneyZ = newZ;
-
-    //        }
-    //    }
-    //}
-
-
 
     #endregion
 
@@ -185,6 +143,30 @@ public class LevelManager : MonoBehaviour
 
     public GameObject GetGroundPrefab(int level)
     {
+        if (pendingEnigmeSequence > 0)
+        {
+            int sequenceIndex = 5 - pendingEnigmeSequence;
+            pendingEnigmeSequence--;
+            Debug.Log($"[LevelManager] Séquence Enigme - StepIndex: {3 - pendingEnigmeSequence - 1} | pending={pendingEnigmeSequence}");
+
+            GameObject result = sequenceIndex switch
+            {
+                0 or 1 => GroundsPrefabsSafe.FirstOrDefault(g => g != null && g.GetComponent<GroundData>()?.EnigmePosition == GroundData.EnigmeZonePosition.Before),
+                2 => GroundsPrefabsSafe.FirstOrDefault(g => g != null && g.GetComponent<GroundData>()?.EnigmePosition == GroundData.EnigmeZonePosition.Center),
+                3 or 4 => GroundsPrefabsSafe.FirstOrDefault(g => g != null && g.GetComponent<GroundData>()?.EnigmePosition == GroundData.EnigmeZonePosition.After),
+                _ => null
+            };
+
+            if (result == null)
+            {
+                Debug.LogWarning($"[LevelManager] Aucun prefab trouvé pour EnigmePosition index={sequenceIndex}");
+                return GroundsPrefabsSafe[0];
+            }
+            Debug.Log($"[LevelManager] Enigme prefab choisi: {result?.name ?? "NULL"}");
+
+            return result;
+        }
+
         return level switch
         {
             0 => GroundsPrefabsSafe[Random.Range(0, GroundsPrefabsSafe.Length)],
@@ -197,6 +179,15 @@ public class LevelManager : MonoBehaviour
     public GameObject GetObstaclePrefab() => GetObstaclePrefab(currentLevel);
     public GameObject GetMoneyPrefab() => GetMoneyPrefab(currentLevel);
 
+    public GameObject GetEnigmePrefab(int level)
+    {
+        return level switch
+        {
+            1 => EnigmePrefabsLevel1[Random.Range(0, EnigmePrefabsLevel1.Length)],
+            2 => EnigmePrefabsLevel2[Random.Range(0, EnigmePrefabsLevel2.Length)],
+            _ => null
+        };
+    }
     public GameObject GetMoneyPrefab(int level)
     {
         return level switch
@@ -243,13 +234,6 @@ public class LevelManager : MonoBehaviour
 
     #region Utility
 
-    //private void SpawnXLocation()
-    //{
-    //    PlayerControler controller = player.GetComponent<PlayerControler>();
-    //    float laneWidth = controller.distanceMax / 3f;
-    //    int randomColumn = Random.Range(0, 3);
-    //    nextLocationSpawn = controller.MIN_X + laneWidth * (randomColumn + 0.5f);
-    //}
     private void AppliquerVitesseJoueur()
     {
         PlayerControler controller = player.GetComponent<PlayerControler>();
@@ -269,7 +253,11 @@ public class LevelManager : MonoBehaviour
 
         controller.forwardSpeed = speed;
     }
-
+   
+    public void TriggerNextEnigmeSequence()
+    {
+        pendingEnigmeSequence = 5;
+    }
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;

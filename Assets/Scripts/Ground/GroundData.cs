@@ -5,9 +5,13 @@ using UnityEditor;
 public class GroundData : MonoBehaviour
 {
     public enum GroundType { Safe, Level1, Level2 }
+    public enum EnigmeZonePosition { None, Before, Center, After }
 
     [Header("Type de ce ground")]
     public GroundType Type = GroundType.Safe;
+
+    [Header("Zone d'énigme")]
+    public EnigmeZonePosition EnigmePosition = EnigmeZonePosition.None;
 
     [Header("Réglages de population (pour Level1 et Level2)")]
     public int minObstacles = 0;

@@ -14,11 +14,36 @@ public class GroundPopulator : MonoBehaviour
 
     private void Start()
     {
+
         if (alreadyPopulated) return;
         alreadyPopulated = true;
 
         if (data == null) return;
-        if (data.Type == GroundData.GroundType.Safe) return;
+
+        Debug.Log($"[DEBUG] Sol instancié: {gameObject.name} | EnigmePos: {data.EnigmePosition}");
+        // Gestion spéciale pour les zones d'énigme
+        if (data.EnigmePosition != GroundData.EnigmeZonePosition.None)
+        {
+            if (data.EnigmePosition == GroundData.EnigmeZonePosition.Center)
+            {
+                Transform sp = data.GetSpawnPoint(4);
+                GameObject prefab = LevelManager.Instance.GetEnigmePrefab(LevelManager.Instance.currentLevel);
+
+                Debug.Log($"[DEBUG] spawnPoint_4 = {(sp != null ? sp.name : "NULL")}, enigme prefab = {(prefab != null ? prefab.name : "NULL")}");
+
+                if (sp != null && prefab != null)
+                {
+                    GameObject go = Instantiate(prefab);
+                    go.transform.position = sp.position + Vector3.up * 1f;
+                    LevelManager.Instance.ApplyDynamicScale(go);
+                    Debug.Log("[GroundPopulator] Énigme placée au centre du ground.");
+                }
+
+
+                return;
+            }
+        }
+            if (data.Type == GroundData.GroundType.Safe) return;
 
         LevelManager lm = LevelManager.Instance;
         if (lm == null)
@@ -77,6 +102,6 @@ public class GroundPopulator : MonoBehaviour
             }
         }
 
-        Debug.Log($"[GroundPopulator]  {obstaclesToSpawn} obstacle(s) et {moneyToSpawn} argent(s) placés sur {gameObject.name}");
+        Debug.Log($"[GroundPopulator] {obstaclesToSpawn} obstacle(s), {moneyToSpawn} argent(s) placés sur {gameObject.name}");
     }
 }

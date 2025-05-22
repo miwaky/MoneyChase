@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Money
+  - RedDoor
+  - BlueDoor
+  - FirstEnigmeGround
   layers:
   - Default
   - TransparentFX

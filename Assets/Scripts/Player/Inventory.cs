@@ -1,8 +1,14 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance;
+
     [Header("Inventory")]
     [SerializeField]
     public int MoneyInInventory = 0;
@@ -20,8 +26,19 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI m_Text;
 
+     
+
     private void Awake()
     {
+        // Singleton
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Évite les doublons
+        }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,31 +69,37 @@ public class Inventory : MonoBehaviour
 
     private void DropMoney(Collider other)
     {
+         int amount = 0;
 
-        if (other.CompareTag("Money"))
+
+        if (other.name.Contains("Bill"))
         {
-            string name = other.gameObject.name;
+            amount = billAmount;
+        }
+        else if (other.name.Contains("Wad"))
+        {
+            amount = wadAmount;
+        }
+        else if (other.name.Contains("Suitcase"))
+        {
+            amount = suitcaseAmount;
+        }
+        else if (other.name.Contains("Diamond"))
+        {
+            amount = DiamondAmount;
+        }
+        MoneyInInventory += amount;
 
-            if (name.Contains("Bill"))
-            {
-                MoneyInInventory += billAmount;
-            }
-            else if (name.Contains("Wad"))
-            {
-                MoneyInInventory += wadAmount;
-            }
-            else if (name.Contains("Suitcase"))
-            {
-                MoneyInInventory += suitcaseAmount;
-            }
-            else if (name.Contains("Diamond"))
-            {
-                MoneyInInventory += DiamondAmount;
-            }
+        //  Notifie le QuestManager pour vérifier si l'argent est lié à une quete
+        QuestManager.Instance?.AddMoneyToQuests(amount);
 
-            Destroy(other.gameObject);
+        Destroy(other.gameObject);
         }
     }
-}
+
+
+
+
+    
 
 

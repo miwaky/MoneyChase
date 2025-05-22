@@ -86,4 +86,6 @@ public class PlayerControler : MonoBehaviour
 
         rb.MovePosition(nextPos);
     }
+
+
 }
