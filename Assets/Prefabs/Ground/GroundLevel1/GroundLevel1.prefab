@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 2306833372570512950}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3333333, y: 0, z: 10}
+  m_LocalPosition: {x: -6.6666665, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -397,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 3912364703132272296}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3333333, y: 0, z: -10}
+  m_LocalPosition: {x: 6.6666665, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -490,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 6443619867286806466}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3333333, y: 0, z: -10}
+  m_LocalPosition: {x: -6.6666665, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -583,7 +583,7 @@ Transform:
   m_GameObject: {fileID: 7423686110454888608}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3333333, y: 0, z: 10}
+  m_LocalPosition: {x: 6.6666665, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -707,7 +707,7 @@ Transform:
   m_GameObject: {fileID: 8158475920289035040}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3333333, y: 0, z: 0}
+  m_LocalPosition: {x: -6.6666665, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -738,7 +738,7 @@ Transform:
   m_GameObject: {fileID: 8160117002461061463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3333333, y: 0, z: 0}
+  m_LocalPosition: {x: 6.6666665, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -849,10 +849,22 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a10d3c61554221042ac4d90ebb62b474, type: 2}
+    - target: {fileID: 3937904930038279561, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b9632d6457e07a41aa3698301c9e91c, type: 2}
+    - target: {fileID: 4185934393164431700, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b9632d6457e07a41aa3698301c9e91c, type: 2}
     - target: {fileID: 4212554185907469826, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       propertyPath: m_Name
       value: GroundLevel1
       objectReference: {fileID: 0}
+    - target: {fileID: 4217188239673892049, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 929dc3bf41496594cbcd3d4badf496d4, type: 2}
     - target: {fileID: 7165415387712566997, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1024,8 +1036,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  minObstacles: 0
-  maxObstacles: 1
+  EnigmePosition: 0
+  minObstacles: 1
+  maxObstacles: 2
   minMoney: 0
   maxMoney: 1
   spawnPoints:

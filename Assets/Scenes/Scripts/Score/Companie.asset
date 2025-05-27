@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42971fbd6a6cae442976a283888ff877, type: 3}
+  m_Name: Companie
+  m_EditorClassIdentifier: 
+  companies:
+  - id: 0
+    name: Campus gaming
+    score: 10000
+    destroyable: 0
+    player: 0
+  - id: 1
+    name: Ubilol
+    score: 5000
+    destroyable: 0
+    player: 0
+  - id: 2
+    name: Bethesbug
+    score: 4000
+    destroyable: 0
+    player: 0

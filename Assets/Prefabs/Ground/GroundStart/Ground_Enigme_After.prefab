@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2288191396312011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3333333, y: 0, z: 10}
+  m_LocalPosition: {x: 6.6666665, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 444750146000682563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3333333, y: 0, z: 0}
+  m_LocalPosition: {x: -6.6666665, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 703877219470606907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3333333, y: 0, z: -10}
+  m_LocalPosition: {x: 6.6666665, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 3798224036070714846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3333333, y: 0, z: 10}
+  m_LocalPosition: {x: -6.6666665, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 6168257486589865423}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3333333, y: 0, z: -10}
+  m_LocalPosition: {x: -6.6666665, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -273,7 +273,7 @@ Transform:
   m_GameObject: {fileID: 8728572168479546271}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3333333, y: 0, z: 0}
+  m_LocalPosition: {x: 6.6666665, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,6 +287,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 611490166586296825, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.04776058
+      objectReference: {fileID: 0}
+    - target: {fileID: 611490166586296825, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -32.3994
+      objectReference: {fileID: 0}
     - target: {fileID: 4212554185907469826, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       propertyPath: m_Name
       value: Ground_Enigme_After

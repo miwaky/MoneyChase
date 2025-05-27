@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4262211224707810171}
   - component: {fileID: 8880028799537626781}
   - component: {fileID: 529058282533053374}
+  - component: {fileID: 7347673851880605688}
   m_Layer: 0
   m_Name: Suitcase
   m_TagString: Money
@@ -109,6 +110,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7347673851880605688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7541382143312875912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce0aca2d771e614895dfc18a26445d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetZ: 5
 --- !u!1 &7594146471857410332
 GameObject:
   m_ObjectHideFlags: 0
