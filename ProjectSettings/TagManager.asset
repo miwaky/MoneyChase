@@ -9,6 +9,9 @@ TagManager:
   - BlueDoor
   - FirstEnigmeGround
   - Obstacle
+  - ObstacleNonMortel
+  - PauseSlowZone
+  - PauseExitZone
   layers:
   - Default
   - TransparentFX
