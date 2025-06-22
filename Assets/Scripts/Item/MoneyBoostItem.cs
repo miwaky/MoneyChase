@@ -4,7 +4,7 @@ public class MoneyBoostItem : MonoBehaviour, IUsableItem
 {
     [SerializeField] private float duration = 10f;
     [SerializeField] private Sprite icon;
-    [SerializeField] private int price = 1000;
+    [SerializeField] private int price = 500;
 
     public int GetPrice() => price;
 

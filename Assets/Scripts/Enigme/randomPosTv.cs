@@ -2,23 +2,34 @@ using UnityEngine;
 
 public class randomPosTv : MonoBehaviour
 {
+    #region Serialized Fields
+
     [SerializeField] private float posZ;
     [SerializeField] private float posX;
     [SerializeField] private float posY;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    #endregion
+
+    #region Unity Callbacks
+
+    // Appelé une fois au démarrage
     void Start()
     {
-        int LeftOrRight = Random.Range(0, 1);
+        // Tire aléatoirement gauche (0) ou droite (1)
+        int LeftOrRight = Random.Range(0, 2); // correction : max est exclusif
         if (LeftOrRight == 0) posX = -7.32f;
-        else if (LeftOrRight == 1) posX = 3.35f;
+        else posX = 3.74f;
 
+        // Recul aléatoire sur l’axe Z par rapport à la position actuelle
+        float currentPosZ = transform.position.z;
+        posZ = currentPosZ - Random.Range(250, 320);
 
-       float currentPosZ = transform.position.z; 
-             posZ = currentPosZ - Random.Range(250, 320);
-                        
+        // Garde la hauteur d’origine
         posY = transform.position.y;
 
-        transform.position = new Vector3(posX,posY,posZ);
+        // Applique la nouvelle position
+        transform.position = new Vector3(posX, posY, posZ);
     }
 
+    #endregion
 }

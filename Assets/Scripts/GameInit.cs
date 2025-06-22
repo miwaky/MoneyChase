@@ -2,10 +2,33 @@ using UnityEngine;
 
 public class GameInit : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Company companyData;
+
     private void Awake()
     {
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 1;
+        companyData.LoadFromFile();
+        Debug.Log("[CompanyLoader] Chargement forcé de la sauvegarde au démarrage.");
     }
+    private void Start()
+    {
+#if UNITY_EDITOR
+        if (Application.isPlaying)
+        {
+            SetFrameSettings();
+        }
+#else
+    SetFrameSettings();
+#endif
+    }
+
+    private void SetFrameSettings()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+    }
+
+
+
+   
 }
+

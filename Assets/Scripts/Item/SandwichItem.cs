@@ -2,17 +2,25 @@ using UnityEngine;
 
 public class SandwichItem : MonoBehaviour, IUsableItem
 {
-    [SerializeField] private Sprite icon;
-    [SerializeField] private int price = 1000;
+    #region Inspector Fields
 
-    public int GetPrice() => price;
+    [SerializeField] private Sprite icon;           // Icône affichée dans l'inventaire
+    [SerializeField] private int price = 1000;      // Prix de l'objet en monnaie
+
+    #endregion
+
+    #region Interface IUsableItem
+
+    public int GetPrice() => price;                 // Retourne le prix de l'objet
+
+    public Sprite GetIcon() => icon;                // Retourne l'icône de l'objet
+
+    public bool IsPassive() => true;                // Cet objet est passif (pas besoin d'activation manuelle)
 
     public void Activate()
     {
-        
+        // Aucun effet actif : objet purement passif
     }
 
-    public Sprite GetIcon() => icon;
-
-    public bool IsPassive() => true; // c'est un objet passif
+    #endregion
 }
