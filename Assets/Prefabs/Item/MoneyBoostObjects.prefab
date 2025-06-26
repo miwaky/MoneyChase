@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 30
   icon: {fileID: 21300000, guid: 08d8eaa7a92c48b45868ec1a446dc11f, type: 3}
+  price: 500

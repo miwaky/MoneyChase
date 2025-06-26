@@ -311,7 +311,22 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log($"[VITESSE] Appliquée depuis LevelManager → Niveau {currentLevel} → Vitesse = {speed}");
     }
+    public float GetSpeedForLevel(int level)
+    {
+        float result = level switch
+        {
+            0 => forwardSpeedLevel0,
+            1 => forwardSpeedLevel1,
+            2 => forwardSpeedLevel2,
+            3 => forwardSpeedLevel3,
+            4 => forwardSpeedLevel4,
+            5 => forwardSpeedLevel5,
+            _ => forwardSpeedLevel1
+        };
 
+        Debug.Log($"[LEVEL SPEED] Niveau {level} → Vitesse {result}");
+        return result;
+    }
 
     // Lance une séquence de 5 zones pour une énigme
     public void TriggerNextEnigmeSequence()

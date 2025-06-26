@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2098129634079353891
+--- !u!1001 &6364462503269284240
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1290936931458909855, guid: 895c2bbf806e3024db17b4ff1ea9bd0f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1290936931458909855, guid: 895c2bbf806e3024db17b4ff1ea9bd0f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52,13 +52,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: VendingMachine Destroy
       objectReference: {fileID: 0}
+    - target: {fileID: 1503039245543582040, guid: 895c2bbf806e3024db17b4ff1ea9bd0f, type: 3}
+      propertyPath: m_TagString
+      value: ObstacleNonMortel
+      objectReference: {fileID: 0}
     - target: {fileID: 2129348779454608446, guid: 895c2bbf806e3024db17b4ff1ea9bd0f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2129348779454608446, guid: 895c2bbf806e3024db17b4ff1ea9bd0f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.37
       objectReference: {fileID: 0}
     - target: {fileID: 2129348779454608446, guid: 895c2bbf806e3024db17b4ff1ea9bd0f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -94,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6209790275088167017, guid: 895c2bbf806e3024db17b4ff1ea9bd0f, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

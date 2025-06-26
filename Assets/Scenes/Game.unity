@@ -890,8 +890,8 @@ MonoBehaviour:
   forwardSpeedLevel3: 55
   forwardSpeedLevel4: 60
   forwardSpeedLevel5: 65
-  chanceToSpawnPauseRoom: 0.2
-  minGroundsBetweenPauseRooms: 20
+  chanceToSpawnPauseRoom: 0.01
+  minGroundsBetweenPauseRooms: 50
   prefabSallePause: {fileID: 2143385480724039166, guid: eece116e38ce71f46b9f6f209ff8afd6, type: 3}
   level2AtMoney: 2000
   level3AtMoney: 5000

@@ -24,7 +24,7 @@ public class VendingMachine : MonoBehaviour
             if (iconImage != null)
                 iconImage.sprite = usable.GetIcon();
 
-            cost = usable.GetPrice();  // <<< ici tu récupères le prix directement depuis l’objet
+            cost = usable.GetPrice();  // récupères le prix directement depuis l’objet
         }
 
         if (priceText != null)
@@ -44,13 +44,15 @@ public class VendingMachine : MonoBehaviour
             return;
         }
 
-        if (Inventory.Instance.MoneyInInventory >= cost)
+        if (Inventory.Instance.MoneyInInventory >= cost && PlayerControler.Instance.CanUseDistributeur())
         {
             Inventory.Instance.MoneyInInventory -= cost;
             Inventory.Instance.SetCurrentItem(selectedItem);
             used = true;
             PlayerControler player = other.GetComponent<PlayerControler>();
             if (player != null) player.RestoreSpeedAfterPause();
+            PlayerControler.Instance.MarkDistributeurUsed();
+
         }
         else
         {

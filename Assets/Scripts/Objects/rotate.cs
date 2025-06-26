@@ -2,12 +2,20 @@ using UnityEngine;
 
 public class rotate : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] Vector3 AxeRotation = new Vector3();
+    #region Rotation Settings
 
-    [SerializeField] float SpeedRotation = 50f;
+    [SerializeField] private Vector3 AxeRotation = new Vector3(); // Axe de rotation (X, Y, Z)
+    [SerializeField] private float SpeedRotation = 50f;           // Vitesse de rotation en degrés/seconde
+
+    #endregion
+
+    #region Unity Callbacks
+
+    // Appelé à chaque frame pour appliquer la rotation
     private void Update()
     {
         transform.Rotate(AxeRotation * SpeedRotation * Time.deltaTime);
     }
+
+    #endregion
 }

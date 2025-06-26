@@ -4,18 +4,25 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseUI;
-    private bool isPaused = false;
+    #region Fields
+
+    [SerializeField] private GameObject pauseUI;  // Référence à l'UI de pause
+    private bool isPaused = false;                // État actuel du jeu
+
+    #endregion
+
+    #region Unity Callbacks
 
     void Start()
     {
-        // Cache l'UI au début
+        // Cache le menu de pause au démarrage
         if (pauseUI != null)
             pauseUI.SetActive(false);
     }
 
     void Update()
     {
+        // Touche Echap pour activer/désactiver la pause
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
@@ -25,6 +32,11 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Pause Methods
+
+    // Met le jeu en pause
     public void Pause()
     {
         Time.timeScale = 0f;
@@ -33,6 +45,7 @@ public class PauseMenu : MonoBehaviour
             pauseUI.SetActive(true);
     }
 
+    // Reprend le jeu
     public void Resume()
     {
         Time.timeScale = 1f;
@@ -41,9 +54,12 @@ public class PauseMenu : MonoBehaviour
             pauseUI.SetActive(false);
     }
 
+    // Quitte vers le menu principal
     public void QuitGame()
     {
-        Debug.Log("Quit Game");
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
+
+    #endregion
 }

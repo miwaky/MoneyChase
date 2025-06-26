@@ -1205,6 +1205,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1863210754105219511, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      propertyPath: m_TagString
+      value: PauseExitZone
+      objectReference: {fileID: 0}
     - target: {fileID: 3937904930038279561, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1273,6 +1277,10 @@ PrefabInstance:
       propertyPath: 'spawnPoints.Array.data[8]'
       value: 
       objectReference: {fileID: 4755858866326267300}
+    - target: {fileID: 8932921346122151208, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
+      propertyPath: m_TagString
+      value: PauseExitZone
+      objectReference: {fileID: 0}
     - target: {fileID: 9075369912146417579, guid: 128bca10d8d5dcf45ad4e2af7b42effc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
